@@ -7,7 +7,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.UUID,
       },
-      dealerId: {
+      dealershipId: {
         type: Sequelize.UUID,
         references: {
           model: 'Dealerships',

@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Inventory.belongsTo(models.Dealership, {
-        foreignKey: 'dealerId',
+        foreignKey: 'dealershipId',
       });
       Inventory.hasMany(models.Car, {
         foreignKey: 'inventoryId',
@@ -19,8 +19,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Inventory.init(
     {
-      carId: DataTypes.UUID,
-      dealerId: DataTypes.UUID,
+      dealershipId: DataTypes.UUID,
       deleted: DataTypes.BOOLEAN,
     },
     {
