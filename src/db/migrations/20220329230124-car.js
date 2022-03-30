@@ -7,12 +7,34 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.UUID,
       },
-      modelId: {
+      inventoryId: {
         type: Sequelize.UUID,
         references: {
-          model: 'Models',
+          model: 'Inventories',
           key: 'id',
         },
+      },
+      carModelId: {
+        type: Sequelize.UUID,
+        references: {
+          model: 'CarModels',
+          key: 'id',
+        },
+      },
+      saleId: {
+        type: Sequelize.UUID,
+        references: {
+          model: 'Sales',
+          key: 'id',
+        },
+      },
+      isSold: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
+      },
+      isNew: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: true,
       },
       modelYear: {
         type: Sequelize.INTEGER,
@@ -25,7 +47,6 @@ module.exports = {
       },
       msrp: {
         type: Sequelize.DECIMAL,
-        defaultValue: true,
       },
       deleted: {
         type: Sequelize.BOOLEAN,

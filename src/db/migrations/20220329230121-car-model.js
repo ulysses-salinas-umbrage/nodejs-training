@@ -1,40 +1,21 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Inventories', {
+    await queryInterface.createTable('CarModels', {
       id: {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.UUID,
       },
-      carId: {
+      trimId: {
         type: Sequelize.UUID,
         references: {
-          model: 'Cars',
+          model: 'Trims',
           key: 'id',
         },
       },
-      dealerId: {
-        type: Sequelize.UUID,
-        references: {
-          model: 'Dealers',
-          key: 'id',
-        },
-      },
-      saleId: {
-        type: Sequelize.UUID,
-        references: {
-          model: 'Sales',
-          key: 'id',
-        },
-      },
-      isSold: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: false,
-      },
-      isNew: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: true,
+      name: {
+        type: Sequelize.STRING,
       },
       deleted: {
         type: Sequelize.BOOLEAN,
@@ -51,6 +32,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Inventories');
+    await queryInterface.dropTable('CarModels');
   },
 };
