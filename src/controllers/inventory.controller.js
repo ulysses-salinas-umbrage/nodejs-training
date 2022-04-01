@@ -1,16 +1,13 @@
 const inventoryRepository = require('../repositories/inventory.repository');
 
 exports.create =  async ({ body }, res) => {
-  if (!body.name) {
-    res.status(400).send({ message: 'Content cannot be empty!' });
-    return;
-  }
   const inventory = {
     dealershipId: body.dealershipId,
     name: body.name,
   };
   try {
     const inventoryRecord = await inventoryRepository.create(inventory);
+    console.log(inventoryRecord)
     res.send(inventoryRecord);
   } catch (error) {
     res.status(500).send({
@@ -47,10 +44,14 @@ exports.findOne = async ({ params }, res) => {
 
 exports.update = async ({ params, body }, res) => {
   const id = params.id;
+  const inventory = {
+    dealershipId: body.dealershipId,
+    name: body.name,
+  };
   try {
-    const numRecords = await inventoryRepository.update(id, body);
+    const numRecords = await inventoryRepository.update(id, inventory);
     if (numRecords.length === 1) {
-      res.send({ message: 'Inventory was updated successfully!' });
+      res.send(body);
     } else {
       res.status(404).send({
         message: `Cannot update Inventory with id=${id}. Inventory was not found or req.body is empty!`,

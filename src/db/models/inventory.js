@@ -20,6 +20,7 @@ module.exports = (sequelize, DataTypes) => {
   Inventory.init(
     {
       dealershipId: DataTypes.UUID,
+      name: DataTypes.STRING,
       deleted: DataTypes.BOOLEAN,
     },
     {

@@ -1,10 +1,6 @@
 const dealershipRepository = require('../repositories/dealership.repository');
 
 exports.create =  async ({ body }, res) => {
-  if (!body.name) {
-    res.status(400).send({ message: 'Content cannot be empty!' });
-    return;
-  }
   const dealership = {
     name: body.name,
     location: body.location,
@@ -48,10 +44,15 @@ exports.findOne = async ({ params }, res) => {
 
 exports.update = async ({ params, body }, res) => {
   const id = params.id;
+  const dealership = {
+    name: body.name,
+    location: body.location,
+    phone: body.phone
+  };
   try {
-    const numRecords = await dealershipRepository.update(id, body);
-    if (numRecords.length === 1) {
-      res.send({ message: 'Dealership was updated successfully!' });
+    const dealershipRecord = await dealershipRepository.update(id, dealership);
+    if (dealershipRecord.length === 1) {
+      res.send(body);
     } else {
       res.status(404).send({
         message: `Cannot update dealership with id=${id}. Dealership was not found or req.body is empty!`,
